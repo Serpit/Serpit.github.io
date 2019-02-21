@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Android 架构组件 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Android 架构组件1. LifeCycleLifeCycle的组件主要用于生命周期的监听，一般可用于Activity和Fragment的生命周期监听。 LifeCycle的组件主要包括如下几个：  LifecycleRegistryOwner LifecycleObserver  使用方法如下：  定义一个需要监听生命周期的组件，实现 LifecycleObserver 接口，使用 @OnL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android 架构组件">
+<meta property="og:url" content="http://yoursite.com/2019/02/21/my-blog/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Android 架构组件1. LifeCycleLifeCycle的组件主要用于生命周期的监听，一般可用于Activity和Fragment的生命周期监听。 LifeCycle的组件主要包括如下几个：  LifecycleRegistryOwner LifecycleObserver  使用方法如下：  定义一个需要监听生命周期的组件，实现 LifecycleObserver 接口，使用 @OnL">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-02-21T10:07:46.226Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android 架构组件">
+<meta name="twitter:description" content="Android 架构组件1. LifeCycleLifeCycle的组件主要用于生命周期的监听，一般可用于Activity和Fragment的生命周期监听。 LifeCycle的组件主要包括如下几个：  LifecycleRegistryOwner LifecycleObserver  使用方法如下：  定义一个需要监听生命周期的组件，实现 LifecycleObserver 接口，使用 @OnL">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-my-blog" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/02/21/my-blog/" class="article-date">
+  <time datetime="2019-02-21T10:01:52.000Z" itemprop="datePublished">2019-02-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android 架构组件
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Android-架构组件"><a href="#Android-架构组件" class="headerlink" title="Android 架构组件"></a>Android 架构组件</h1><h2 id="1-LifeCycle"><a href="#1-LifeCycle" class="headerlink" title="1. LifeCycle"></a>1. LifeCycle</h2><p>LifeCycle的组件主要用于生命周期的监听，一般可用于Activity和Fragment的生命周期监听。</p>
+<p>LifeCycle的组件主要包括如下几个：</p>
+<ol>
+<li>LifecycleRegistryOwner</li>
+<li>LifecycleObserver</li>
+</ol>
+<p>使用方法如下：</p>
+<ol>
+<li><p>定义一个需要监听生命周期的组件，实现 <strong>LifecycleObserver</strong> 接口，使用 <strong>@OnLifecycleEvent</strong> 注解定义相关的生命周期</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public class MyObserver  implements LifecycleObserver&#123;</span><br><span class="line"></span><br><span class="line">    private static final String TAG = &quot;MyObserver_TAG&quot;;</span><br><span class="line">    </span><br><span class="line">    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)</span><br><span class="line">    public void onResume()&#123;</span><br><span class="line">        Log.d(TAG,&quot;onResume&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @OnLifecycleEvent(Lifecycle.Event.ON_START)</span><br><span class="line">    public void onStart()&#123;</span><br><span class="line">        Log.d(TAG,&quot;onStart&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)</span><br><span class="line">    public void onPause()&#123;</span><br><span class="line">        Log.d(TAG,&quot;onPause&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>给Activity或Fragment注册监听，实现 <strong>LifecycleRegistryOwner</strong>接口，实现 <strong>getLifecycle()</strong> 方法即可</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public class LifecycleActivity extends AppCompatActivity implements LifecycleRegistryOwner &#123;</span><br><span class="line"></span><br><span class="line">    LifecycleRegistry lifecycleRegistry = new LifecycleRegistry(this);</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_lifecycle);</span><br><span class="line">        getLifecycle().addObserver(new MyObserver());//添加注册一个Observer</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @NonNull</span><br><span class="line">    @Override</span><br><span class="line">    public LifecycleRegistry getLifecycle() &#123;</span><br><span class="line">       return lifecycleRegistry;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>LifeCycle的组件可以很大程度的帮助开发者实现生命周期监听而无需写更多的代码，在生命周期的管理中有大的作用</p>
+<h2 id="2-ViewModel"><a href="#2-ViewModel" class="headerlink" title="2. ViewModel"></a>2. ViewModel</h2><p>ViewModel是用来存储和管理UI相关的数据的，一遍数据在配置更改的时候还能生存进来</p>
+<h2 id="3-LiveData"><a href="#3-LiveData" class="headerlink" title="3. LiveData"></a>3. LiveData</h2><p>LiveData是一个具有生命周期绑定的数据容器，用此容器封装的数据可以根据外界的生命周期变化而变化，LiveData</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/02/21/my-blog/" data-id="cjsehfjoh000240o471bkitbx" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/02/21/blogdemo/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          blogdemo
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/02/21/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/02/21/blogdemo/">blogdemo</a>
+          </li>
+        
+          <li>
+            <a href="/2019/02/21/my-blog/">Android 架构组件</a>
+          </li>
+        
+          <li>
+            <a href="/2019/02/21/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Serpit<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
