@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Android,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Android杂七杂八Activiy1、生命周期onCreate() -&amp;gt; onStart() -&amp;gt; onResume() -&amp;gt; onPause() -&amp;gt; onStop() -&amp;gt; onDestroy() 横竖屏切换生命周期会重来">
+<meta name="keywords" content="Android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android杂七杂八">
+<meta property="og:url" content="http://yoursite.com/2019/02/22/Android杂七杂八/index.html">
+<meta property="og:site_name" content="Serpit&#39;s Blog">
+<meta property="og:description" content="Android杂七杂八Activiy1、生命周期onCreate() -&amp;gt; onStart() -&amp;gt; onResume() -&amp;gt; onPause() -&amp;gt; onStop() -&amp;gt; onDestroy() 横竖屏切换生命周期会重来">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-21T16:22:48.669Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android杂七杂八">
+<meta name="twitter:description" content="Android杂七杂八Activiy1、生命周期onCreate() -&amp;gt; onStart() -&amp;gt; onResume() -&amp;gt; onPause() -&amp;gt; onStop() -&amp;gt; onDestroy() 横竖屏切换生命周期会重来">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/02/22/Android杂七杂八/">
+
+
+
+
+
+  <title>Android杂七杂八 | Serpit's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/Serpit" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Serpit's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">小司</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/22/Android杂七杂八/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Serpit-G">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Serpit's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Android杂七杂八</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-22T00:21:57+08:00">
+                2019-02-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Android杂七杂八"><a href="#Android杂七杂八" class="headerlink" title="Android杂七杂八"></a>Android杂七杂八</h1><h2 id="Activiy"><a href="#Activiy" class="headerlink" title="Activiy"></a>Activiy</h2><h3 id="1、生命周期"><a href="#1、生命周期" class="headerlink" title="1、生命周期"></a>1、生命周期</h3><p>onCreate() -&gt; onStart() -&gt; onResume()<br> -&gt; onPause() -&gt; onStop() -&gt; onDestroy()</p>
+<p>横竖屏切换生命周期会重来<br><a id="more"></a><br>此外，Activity中的变量会为重新初始化，此时利用Bundle可以很好的解决问题，每次onCreate()调用的时候都会带来一个Bundle，这个Bundle就会携带一些数据，而这些数据的来源是来自于Activity中的onSaveInstanceState()中所保存的，若没有调用该方法，默认为null;</p>
+<p>activity启动模式：standard、singleTop、singleTask、singleInstance </p>
+<blockquote>
+<p>Standard:每次激活Activity时，都创建Activity实例</p>
+</blockquote>
+<blockquote>
+<p>SingleTop:如果某个Activity自己激活自己，即任务栈栈顶就是该Activity，则不需要创建，否则其余情况都需要创建该实例，新闻推送页</p>
+</blockquote>
+<blockquote>
+<p>SingleTask:如果要激活的Acvtivity在任务栈中存在该实例，则不需要创建，只需要把此Activity放入栈顶，并把该Activity上面的Activity都POP，，首页</p>
+</blockquote>
+<blockquote>
+<p>SingleInstance:如果应用1的任务栈中创建了该实例，如果应用2也要激活该实例，则不需要创建，两应用共享该实例</p>
+</blockquote>
+<p>back：finish-&gt;onPause-&gt;onStop-&gt;onDestory。也就是说点击了back后，再次进入该activity需要重新onCreate</p>
+<p>home：onPause-&gt;onStop。此时Activity实例并没有销毁，所以再次进入时走onRestart-&gt;onStart-&gt;onResume</p>
+<p>横竖屏切换：onPause –&gt;onSaveInstanceState –&gt;onStop –&gt;onDestroy –&gt;onCreate–&gt;onStart –&gt;<br>onRestoreInstanceState–&gt;onResume –&gt;onPause –&gt;onStop –&gt;onDestroy</p>
+<h4 id="TaskAffinity"><a href="#TaskAffinity" class="headerlink" title="TaskAffinity"></a>TaskAffinity</h4><blockquote>
+<p>affinity指的是activity与task的吸附关系，也就是activity属于哪个task。每个activity都有<strong>android:taskAffinity</strong>属性，若不声明则使用的是application的taskAffinity的值，若application也没有声明该属性，则使用应用包名来作为该属性的值。该值可以是任何字符串，但必须包含一个 . ，否则会报错</p>
+</blockquote>
+<h5 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h5><ol>
+<li>根据affinity重新为activity选择宿主task，需要与allowTaskReparenting属性配合使用</li>
+</ol>
+<p>allowTaskReparenting用来标记Activity能否从启动的Task移动到taskAffinity指定的Task，当把Activity的allowTaskReparenting属性设置成true时，Activity就拥有了一个转移所在Task的能力。具体点来说，就是一个Activity现在是处于某个Task当中的，但是它与另外一个Task具有相同的affinity值，那么当另外这个任务切换到前台的时候，该Activity就可以转移到现在的这个任务当中。allowTaskReparenting默认是继承至application中的allowTaskReparenting=false，如果为true，则表示可以更换；false表示不可以。 </p>
+<ol start="2">
+<li>启动一个actvity过程中，intent使用FLAG_ACTIVITY_NEW_TASK标记，根据cffinity查找<br>或创建一个新的具有对应affinity的task</li>
+</ol>
+<p>当调用startActivity()方法来启动一个Activity时，默认是将它放入到当前的任务当中。但是，如果在Intent中加入了FLAG_ACTIVITY_NEW_TASK flag的话，情况就会变的复杂起来。首先，系统会去检查这个Activity的affinity是否与当前Task的affinity相同。如果相同的话就会把它放入到当前Task当中，如果不同则会先去检查是否已经有一个名字与该Activity的affinity相同的Task,如果有，这个Task将被调到前台，同时这个Activity将显示在这个Task的顶端；如果没有的话，系统将会尝试为这个Activity创建一个新的Task。需要注意的是，如果一个Activity在manifest文件中声明的启动模式是”singleTask”，那么他被启动的时候，行为模式会和前面提到的指定FLAG_ACTIVITY_NEW_TASK一样。 </p>
+<h3 id="Intent匹配规则"><a href="#Intent匹配规则" class="headerlink" title="Intent匹配规则"></a>Intent匹配规则</h3><h4 id="action匹配规则"><a href="#action匹配规则" class="headerlink" title="action匹配规则"></a>action匹配规则</h4><p><code>intent</code>中的<code>action</code>能够过和过滤规则中的任何一个action相同即为匹配成功。若intent没有指定action，那么匹配失败</p>
+<h4 id="category匹配规则"><a href="#category匹配规则" class="headerlink" title="category匹配规则"></a>category匹配规则</h4><p>intent中的所有的category都必须和过滤规则中的category相同。若intent中没有category，则intent仍然可以匹配成功</p>
+<h4 id="data匹配规则"><a href="#data匹配规则" class="headerlink" title="data匹配规则"></a>data匹配规则</h4><p>如果过滤规则中定义了data，那么intent必须也要定义匹配的data</p>
+<h3 id="Context的种类"><a href="#Context的种类" class="headerlink" title="Context的种类"></a>Context的种类</h3><p>application、activity、service、brocast、contentProvider<br></p>
+<p>除了activity，其他context启动activity会另开任务栈,其他context使用layoutInflate会使用系统默认主题，自定义的主题可能不会被使用，其他context不可以show a dialog<br></p>
+<p>brocastReceiver的context不可以bindService，不可以register brocastReceiver<br></p>
+<h3 id="2-Fragment生命周期"><a href="#2-Fragment生命周期" class="headerlink" title="2.Fragment生命周期"></a>2.Fragment生命周期</h3><p>Fragment的生命周期和Activity有点类似，按顺序来有这几种：Created-&gt;Started-&gt;Resumed-&gt;Paused-&gt;Stopped-&gt;Destroyed</p>
+<p>其中Created包括：onAttach() -&gt; onCreate() -&gt; onCreateView() -&gt; onAcivity()</p>
+<p>Started包括：onStart()</p>
+<p>Resumeed包括: onResume()</p>
+<p>Paused包括: onPause()</p>
+<p>Stopped包括：onStop()</p>
+<p>Destroyed包括：onDestroyView() -&gt; onDestroy() -&gt; onDetach()</p>
+<h3 id="3-View的工作过程"><a href="#3-View的工作过程" class="headerlink" title="3.View的工作过程"></a>3.View的工作过程</h3><p>onMeasure -&gt; onLayout -&gt; onDraw </p>
+<h3 id="4-AIDL"><a href="#4-AIDL" class="headerlink" title="4.AIDL"></a>4.AIDL</h3><p>AIDL是一种帮助开发者实现Binder的一种工具</p>
+<p>利用AIDL来创建Binder总共需要三个文件</p>
+<ul>
+<li>基本简单java类 (如Book.java)，并实现Parcelable接口进行序列化</li>
+<li>声明该类的.aidl文件，如Book.aidl，</li>
+<li>操作该类的aidl文件，在里面声明操作这个类的行为(如 addBook , getBookList…)，此文件里的声明类似于java里的接口</li>
+</ul>
+<h4 id="Binder实现IPC"><a href="#Binder实现IPC" class="headerlink" title="Binder实现IPC"></a>Binder实现IPC</h4><p><strong>Service</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">//IBookManager.Stub是一个Binder，利用这个AIDL生成的Binder就可以轻松实现对数据的操作，并且能响应客户端的请求</span><br><span class="line">private IBookManager.Stub mBookManager = new IBookManager.Stub() &#123;</span><br><span class="line">        @Override</span><br><span class="line">        public List&lt;Book&gt; getBookList() throws RemoteException &#123;</span><br><span class="line">            return mBooks;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public void addBook(Book book) throws RemoteException &#123;</span><br><span class="line">                mBooks.add(book);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">//Service中利用bind方法可以和客户端绑定，并将这个Binder返回，使得客户端和Service操作同一个Binder</span><br></pre></td></tr></table></figure></p>
+<p><strong>Client</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//Activity作为客户端</span><br><span class="line">//Activity客户端需要构建一个ServiceConnection和Service建立连接，并利用这个Connection来得到Binder</span><br><span class="line">//利用这个Binder就可以操作数据，使得操作远程的数据像本地的数据一样方便</span><br></pre></td></tr></table></figure></p>
+<h3 id="5、Service生命周期"><a href="#5、Service生命周期" class="headerlink" title="5、Service生命周期"></a>5、Service生命周期</h3><p>1、普通启动startService</p>
+<p>onCreate -&gt; onStartCommand -&gt; onDestroy</p>
+<p>2、绑定启动bindService</p>
+<p>onCreate -&gt; onBind -&gt; onUnbind -&gt; onDestory</p>
+<p>多次调用startService只会重复调用onStartCommand方法，不会多次调用onCreate，如果一个service又start又bind，那么它不能通过stopService方法结束，而是先要通过unBindSer<br>vice才能结束</p>
+<h3 id="6、LruChache"><a href="#6、LruChache" class="headerlink" title="6、LruChache"></a>6、LruChache</h3><h4 id="1、使用方法"><a href="#1、使用方法" class="headerlink" title="1、使用方法"></a>1、使用方法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">int maxMemory = (int) (Runtime.getRuntime().totalMemory()/1024);</span><br><span class="line">        int cacheSize = maxMemory/8;</span><br><span class="line">        mMemoryCache = new LruCache&lt;String,Bitmap&gt;(cacheSize)&#123;</span><br><span class="line">            @Override</span><br><span class="line">            protected int sizeOf(String key, Bitmap value) &#123;</span><br><span class="line">                return value.getRowBytes()*value.getHeight()/1024;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br></pre></td></tr></table></figure>
+<p>①设置LruCache缓存的大小，一般为当前进程可用容量的1/8。<br><br>②重写sizeOf方法，计算出要缓存的每张图片的大小。</p>
+<p>注意：缓存的总容量和每个缓存对象的大小所用单位要一致。</p>
+<h4 id="内部原理"><a href="#内部原理" class="headerlink" title="内部原理"></a>内部原理</h4><blockquote>
+<p>思想：维护一个列表，对象列表的排列方式时按照访问顺序实现的，即一直没访问的对象，将放在队尾，即将被淘汰。而最近访问的放在队头，最后被淘汰。</p>
+</blockquote>
+<p>队列由LinkedHashMap来维护</p>
+<h4 id="put过程"><a href="#put过程" class="headerlink" title="put过程"></a>put过程</h4><p>在map里添加元素，调用trimToSize()判断缓存是否满了，如果满了，就用linkedHashMap的迭代器删除队尾元素，即近期最少访问的元素</p>
+<h4 id="get过程"><a href="#get过程" class="headerlink" title="get过程"></a>get过程</h4><p>调用linkedhashmap的get方法获得对应的元素，并更新该元素到队头</p>
+<h3 id="内存抖动"><a href="#内存抖动" class="headerlink" title="内存抖动"></a>内存抖动</h3><blockquote>
+<p>内存抖动是由于短时间内有大量对象进出Young Generiation区导致的，它伴随着频繁的GC</p>
+</blockquote>
+<p>避免：</p>
+<ul>
+<li>尽量避免在循环体内创建对象，应该把对象创建移到循环体外。 </li>
+<li>注意自定义View的onDraw()方法会被频繁调用，所以在这里面不应该频繁的创建对象。 </li>
+<li>当需要大量使用Bitmap的时候，试着把它们缓存在数组中实现复用。 </li>
+<li>对于能够复用的对象，同理可以使用对象池将它们缓存起来。</li>
+</ul>
+<h3 id="Android类加载器"><a href="#Android类加载器" class="headerlink" title="Android类加载器"></a>Android类加载器</h3><p>由于android中执行的是dex文件，而并非是class文件，因此android不能使用jvm的类加载器去加载class文件。安卓中的类加载器分为三种</p>
+<ul>
+<li>BootClassLoader，该类是在android在启动的时候来预加载常用类，与jvm中的BootStrap classloader 不同的是，它不是由C/C++实现的，而是由java实现的，它是ClassLoader的内部类<br><br>PathClassLoader用来操作本地文件系统中的文件和目录的集合。并不会加载来源于网络中的类。Android采用这个类加载器一般是用于加载系统类和它自己的应用类。这个应用类放置在data/data/包名下。</li>
+<li>PathClassLoader，可以加载已经安装的apk，也就是<code>/data/app/package</code>下的apk文件，也可以加载<code>/vendor/lib/</code>,<code>/system/lib下的nativeLibrary</code></li>
+<li>DexClassLoader <code>dalvik/system.DexClassLoader</code>,可以加载一个未安装的apk文件</li>
+</ul>
+<h3 id="SQLite使用优化"><a href="#SQLite使用优化" class="headerlink" title="SQLite使用优化"></a>SQLite使用优化</h3><ol>
+<li><p>SQLite会默认（不手动开启的情况下）为所有插入和更新创建事务，即如果有一千条记录插入，会执行一千次【创建事务-&gt; 插入 -&gt; 结束事务】的操作，因此需要手动去开启事务来减少插入或更新时事务开启带来的性能损耗，方式如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">SQLiteDataBase db = mSQLiteHelper.getWriteableDatabase();</span><br><span class="line">db.beginTransatction();</span><br><span class="line">for(int i = 0;i&lt;100;i++)&#123;</span><br><span class="line">    db.insert(xxxx);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">db.setTransactionSuccessful(true);//设置事务执行成功</span><br><span class="line">db.endTransaction();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在构建sql语句时，使用StringBuilder和StringBuffer</p>
+</li>
+<li>在查询的时候，尽可能查询时查出具体所要的值，而不要查出一列或一行，再进而进行查询</li>
+<li>cursor使用后要及时关闭</li>
+<li>建立以及使用索引</li>
+<li>尽量将sql的操作放在子线程中，因为sql的操作属于本地IO操作</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/22/面经答案/" rel="next" title="面经答案">
+                <i class="fa fa-chevron-left"></i> 面经答案
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Serpit-G">
+            
+              <p class="site-author-name" itemprop="name">Serpit-G</p>
+              <p class="site-description motion-element" itemprop="description">Hello Word!</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Android杂七杂八"><span class="nav-number">1.</span> <span class="nav-text">Android杂七杂八</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Activiy"><span class="nav-number">1.1.</span> <span class="nav-text">Activiy</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、生命周期"><span class="nav-number">1.1.1.</span> <span class="nav-text">1、生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#TaskAffinity"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">TaskAffinity</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#应用"><span class="nav-number">1.1.1.1.1.</span> <span class="nav-text">应用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Intent匹配规则"><span class="nav-number">1.1.2.</span> <span class="nav-text">Intent匹配规则</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#action匹配规则"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">action匹配规则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#category匹配规则"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">category匹配规则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#data匹配规则"><span class="nav-number">1.1.2.3.</span> <span class="nav-text">data匹配规则</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Context的种类"><span class="nav-number">1.1.3.</span> <span class="nav-text">Context的种类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Fragment生命周期"><span class="nav-number">1.1.4.</span> <span class="nav-text">2.Fragment生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-View的工作过程"><span class="nav-number">1.1.5.</span> <span class="nav-text">3.View的工作过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-AIDL"><span class="nav-number">1.1.6.</span> <span class="nav-text">4.AIDL</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Binder实现IPC"><span class="nav-number">1.1.6.1.</span> <span class="nav-text">Binder实现IPC</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、Service生命周期"><span class="nav-number">1.1.7.</span> <span class="nav-text">5、Service生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6、LruChache"><span class="nav-number">1.1.8.</span> <span class="nav-text">6、LruChache</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、使用方法"><span class="nav-number">1.1.8.1.</span> <span class="nav-text">1、使用方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#内部原理"><span class="nav-number">1.1.8.2.</span> <span class="nav-text">内部原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#put过程"><span class="nav-number">1.1.8.3.</span> <span class="nav-text">put过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#get过程"><span class="nav-number">1.1.8.4.</span> <span class="nav-text">get过程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存抖动"><span class="nav-number">1.1.9.</span> <span class="nav-text">内存抖动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Android类加载器"><span class="nav-number">1.1.10.</span> <span class="nav-text">Android类加载器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SQLite使用优化"><span class="nav-number">1.1.11.</span> <span class="nav-text">SQLite使用优化</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Serpit-G</span>
+
+  
+</div>
+
+
+  <div class="powered-by">欢迎转载</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="1. LifeCycleLifeCycle的组件主要用于生命周期的监听，一般可用于Activity和Fragment的生命周期监听。 LifeCycle的组件主要包括如下几个：  LifecycleRegistryOwner LifecycleObserver  使用方法如下：  定义一个需要监听生命周期的组件，实现 LifecycleObserver 接口，使用 @OnLifecycleEven">
+<meta name="description" content="1. LifeCycleLifeCycle的组件主要用于生命周期的监听，一般可用于Activity和Fragment的生命周期监听。 LifeCycle的组件主要包括如下几个：  LifecycleRegistryOwner LifecycleObserver">
 <meta name="keywords" content="Android">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android 架构组件">
-<meta property="og:url" content="http://yoursite.com/2019/02/21/my-blog/index.html">
+<meta property="og:url" content="http://yoursite.com/2019/02/21/Android架构组件笔记/index.html">
 <meta property="og:site_name" content="Serpit&#39;s Blog">
-<meta property="og:description" content="1. LifeCycleLifeCycle的组件主要用于生命周期的监听，一般可用于Activity和Fragment的生命周期监听。 LifeCycle的组件主要包括如下几个：  LifecycleRegistryOwner LifecycleObserver  使用方法如下：  定义一个需要监听生命周期的组件，实现 LifecycleObserver 接口，使用 @OnLifecycleEven">
+<meta property="og:description" content="1. LifeCycleLifeCycle的组件主要用于生命周期的监听，一般可用于Activity和Fragment的生命周期监听。 LifeCycle的组件主要包括如下几个：  LifecycleRegistryOwner LifecycleObserver">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-02-21T13:18:46.979Z">
+<meta property="og:updated_time" content="2019-02-21T16:14:36.861Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android 架构组件">
-<meta name="twitter:description" content="1. LifeCycleLifeCycle的组件主要用于生命周期的监听，一般可用于Activity和Fragment的生命周期监听。 LifeCycle的组件主要包括如下几个：  LifecycleRegistryOwner LifecycleObserver  使用方法如下：  定义一个需要监听生命周期的组件，实现 LifecycleObserver 接口，使用 @OnLifecycleEven">
+<meta name="twitter:description" content="1. LifeCycleLifeCycle的组件主要用于生命周期的监听，一般可用于Activity和Fragment的生命周期监听。 LifeCycle的组件主要包括如下几个：  LifecycleRegistryOwner LifecycleObserver">
 
 
 
@@ -120,7 +120,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/02/21/my-blog/">
+  <link rel="canonical" href="http://yoursite.com/2019/02/21/Android架构组件笔记/">
 
 
 
@@ -253,7 +253,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/21/my-blog/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/21/Android架构组件笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Serpit-G">
@@ -324,10 +324,10 @@
 <p>LifeCycle的组件主要包括如下几个：</p>
 <ol>
 <li>LifecycleRegistryOwner</li>
-<li>LifecycleObserver</li>
-</ol>
+<li><p>LifecycleObserver</p>
+<a id="more"></a>
 <p>使用方法如下：</p>
-<ol>
+</li>
 <li><p>定义一个需要监听生命周期的组件，实现 <strong>LifecycleObserver</strong> 接口，使用 <strong>@OnLifecycleEvent</strong> 注解定义相关的生命周期</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public class MyObserver  implements LifecycleObserver&#123;</span><br><span class="line"></span><br><span class="line">    private static final String TAG = &quot;MyObserver_TAG&quot;;</span><br><span class="line">    </span><br><span class="line">    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)</span><br><span class="line">    public void onResume()&#123;</span><br><span class="line">        Log.d(TAG,&quot;onResume&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @OnLifecycleEvent(Lifecycle.Event.ON_START)</span><br><span class="line">    public void onStart()&#123;</span><br><span class="line">        Log.d(TAG,&quot;onStart&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)</span><br><span class="line">    public void onPause()&#123;</span><br><span class="line">        Log.d(TAG,&quot;onPause&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
@@ -374,8 +374,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/02/21/jvm笔记/" rel="prev" title="jvm笔记">
-                jvm笔记 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/02/21/jvm笔记/" rel="prev" title="JVM笔记">
+                JVM笔记 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -455,7 +455,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -468,7 +468,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
